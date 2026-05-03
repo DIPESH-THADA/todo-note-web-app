@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- ============= icons Ccdn ============ -->
+    <script src="https://kit.fontawesome.com/e7ef4b81f7.js" crossorigin="anonymous"></script>
+
+    <!-- ============ FONT LINK ============= -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Emblema+One&family=Karla:ital,wght@0,200..800;1,200..800&family=League+Spartan:wght@100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:wght@300;400;500;600;700&family=Roboto+Serif:ital,opsz,wght@0,8..144,100..900;1,8..144,100..900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <title>To Do List</title>
+
+</head>
+
+<body>
+
+
+
+    <header>
+        <section class="header-section d-flex align-items-center justify-content-between px-3 py-3">
+            <div class="header__logo">
+                <div class="logo">
+                    <i class="fa-solid fa-book-open"></i>
+                </div>
+                <span class="ms-2 fs-4 fw-bold">To Do</span>
+            </div>
+
+            <nav class="header__nav align-items-center gap-4 flex-grow-1 ms-4">
+
+                <form class="search-bar ms-auto" id="search-form">
+                    <label for="search-input"></label><i class="fa-solid fa-magnifying-glass"></i><input type="text"
+                        placeholder="Search notes by title, content or tag…" class="form-control form-control-sm search"
+                        id="search-input" />
+                </form>
+
+                <ul class="header__nav--icons d-flex gap-3 list-unstyled mb-0">
+                    <li>
+                        <button
+                            class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium       transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 hover:bg-accent hover:text-accent-foreground h-9 w-9"
+                            id="theme-toggle" title="Light mode"><svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round"
+                                class="lucide lucide-sun w-4 h-4 text-yellow-400">
+                                <circle cx="12" cy="12" r="4"></circle>
+                                <path d="M12 2v2"></path>
+                                <path d="M12 20v2"></path>
+                                <path d="m4.93 4.93 1.41 1.41"></path>
+                                <path d="m17.66 17.66 1.41 1.41"></path>
+                                <path d="M2 12h2"></path>
+                                <path d="M20 12h2"></path>
+                                <path d="m6.34 17.66-1.41 1.41"></path>
+                                <path d="m19.07 4.93-1.41 1.41"></path>
+                            </svg></button>
+                    </li>
+                    <li><button
+                            class="items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 hover:bg-accent hover:text-accent-foreground h-9 w-9 hidden sm:flex"
+                            title="Switch to list view"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-list w-4 h-4">
+                                <path d="M3 12h.01"></path>
+                                <path d="M3 18h.01"></path>
+                                <path d="M3 6h.01"></path>
+                                <path d="M8 12h13"></path>
+                                <path d="M8 18h13"></path>
+                                <path d="M8 6h13"></path>
+                            </svg></button>
+                    </li>
+                    <li><button
+                            class="items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 hover:bg-accent hover:text-accent-foreground h-9 w-9 hidden sm:flex"
+                            type="button" id="radix-:r0:" aria-haspopup="menu" aria-expanded="false"
+                            data-state="closed"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round"
+                                class="lucide lucide-ellipsis-vertical w-4 h-4">
+                                <circle cx="12" cy="12" r="1"></circle>
+                                <circle cx="12" cy="5" r="1"></circle>
+                                <circle cx="12" cy="19" r="1"></circle>
+                            </svg></button></li>
+
+                    <li>
+                        <button id="openModal"
+                            class="inline-flex add-item items-center justify-center whitespace-nowrap font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 bg-primary text-primary-foreground shadow hover:bg-primary/90 h-8 rounded-md px-3 text-xs gap-1.5 ml-1"><i
+                                class="fa-solid fa-plus"></i><span class="hidden sm:inline">New Note</span></button>
+                    </li>
+
+                </ul>
+            </nav>
+        </section>
+    </header>
+
+    <main class="main-section">
+        <aside
+            class="w-60 shrink-0 hidden md:flex flex-col border-r border-border bg-background h-[calc(100vh-4rem)] sticky top-16 overflow-y-auto aside-section">
+            <nav class="flex flex-col gap-0.5 p-3">
+                <p>Library</p>
+
+                <div class="column">
+                    <button
+                        class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors w-full text-left bg-primary text-primary-foreground active">
+                        <div class="icon"><i class="fa-solid fa-book-open"></i>
+                            <span class="flex-1 all-notes">All Notes</span>
+                        </div><span
+                            class="text-xs rounded-full px-1.5 py-0.5 font-mono bg-primary-foreground/20 text-primary-foreground number">6</span>
+                    </button>
+
+                    <button
+                        class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors w-full text-left hover:bg-muted text-foreground">
+                        <div class="icon"><i class="fa-solid fa-star"></i><span class="flex-1">Favorites</span></div>
+                        <span
+                            class="text-xs rounded-full px-1.5 py-0.5 font-mono bg-muted text-muted-foreground number">5</span>
+                    </button>
+
+                    <button
+                        class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors w-full text-left hover:bg-muted text-foreground">
+                        <div class="icon"><i class="fa-solid fa-archive"></i><span class="flex-1">Archive</span></div>
+                        <span
+                            class="text-xs rounded-full px-1.5 py-0.5 font-mono bg-muted text-muted-foreground number">3</span>
+                    </button>
+                </div>
+
+                <p class="text-[11px] font-semibold text-muted-foreground uppercase tracking-wider px-3 py-2 mt-3">
+                    Categories</p>
+                <div class="column">
+                    <button
+                        class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors w-full text-left hover:bg-muted text-foreground">
+                        <div class="icon"><i class="fa-solid fa-user person"></i><span class="flex-1">Personal</span>
+                        </div>
+                        <span
+                            class="text-xs rounded-full px-1.5 py-0.5 font-mono bg-muted text-muted-foreground number">2</span>
+                    </button>
+
+                    <button
+                        class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors w-full text-left hover:bg-muted text-foreground">
+                        <div class="icon"><i class="fa-solid fa-briefcase work"></i><span class="flex-1">Work</span>
+                        </div>
+                        <span
+                            class="text-xs rounded-full px-1.5 py-0.5 font-mono bg-muted text-muted-foreground number">2</span>
+                    </button>
+
+                    <button
+                        class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors w-full text-left hover:bg-muted text-foreground">
+                        <div class="icon"><i class="fa-solid fa-graduation-cap study"></i><span
+                                class="flex-1">Study</span>
+                        </div><span
+                            class="text-xs rounded-full px-1.5 py-0.5 font-mono bg-muted text-muted-foreground number">2</span>
+                    </button>
+
+                    <button
+                        class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors w-full text-left hover:bg-muted text-foreground">
+                        <div class="icon"><i class="fa-regular fa-lightbulb idea"></i><span class="flex-1">Ideas</span>
+                        </div>
+                        <span
+                            class="text-xs rounded-full px-1.5 py-0.5 font-mono bg-muted text-muted-foreground number">1</span>
+                    </button>
+
+                    <button
+                        class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors w-full text-left hover:bg-muted text-foreground">
+                        <div class="icon"><i class="fa-solid fa-calendar-check todo"></i><span
+                                class="flex-1">TO-DO</span></div><span
+                            class="text-xs rounded-full px-1.5 py-0.5 font-mono bg-muted text-muted-foreground number">1</span>
+                    </button>
+
+
+                    <button
+                        class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors w-full text-left hover:bg-muted text-foreground">
+                        <div class="icon"><i class="fa-solid fa-ellipsis other"></i><span class="flex-1">Other</span>
+                        </div>
+                    </button>
+                </div>
+
+                <div class="mt-4 px-3 py-3 rounded-lg bg-muted/60 flex items-start gap-2 search-help"><i
+                        class="fa-solid fa-tag"></i>
+                    <p class="text-xs text-muted-foreground leading-relaxed ">Search by tag name in the
+                        search bar to
+                        filter by tags.</p>
+                </div>
+            </nav>
+        </aside>
+
+        <section class="content">
+            <div class="content-head">
+                <div class="title-block">
+                    <h1>Ideas</h1>
+                    <div class="stats">
+                        <div class="note">
+                            <i class="fa-solid fa-clipboard-list"></i>
+                            <p>
+                                <span>6 </span>notes
+                            </p>
+                        </div>
+
+                        <div class="favorite">
+                            <i class="fa-regular fa-star"></i>
+                            <p>
+                                <span>5 </span>favorites
+                            </p>
+                        </div>
+
+                        <div class="archived">
+                            <i class="fa-solid fa-archive"></i>
+                            <p>
+                                <span>3 </span>archived
+                            </p>
+                        </div>
+
+                    </div>
+                </div>
+                <span class="note-count">☷ 1 note</span>
+            </div>
+
+            <p class="empty-state">Add your first note or to-do list</p>
+            <section class="cards">
+                <!-- <article class="card">
+                    <div class="two-button">
+                        <div class="pill">
+                            <span>Ideas</span>
+                        </div>
+
+                        <div class="dropdown">
+                            <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                <i class="fa-solid fa-ellipsis"> </i>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><button class="dropdown-item" id="editNote"><i
+                                            class="fa-solid fa-marker"></i>Edit</button></li>
+                                <li><button class="dropdown-item" id="duplicateNote"><i
+                                            class="fa-regular fa-copy"></i>Duplicate</button></li>
+                                <li><button class="dropdown-item" id="pinNote"><i class="fa-solid fa-thumbtack"></i>Pin
+                                        To Top</button></li>
+                                <li><button class="dropdown-item" id="archiveNote"><i
+                                            class="fa-solid fa-archive"></i>Archive</button></li>
+                                <li><button class="dropdown-item" id="deleteNote"><i
+                                            class="fa-solid fa-trash"></i>Delete</button></li>
+
+                            </ul>
+                        </div>
+
+                    </div>
+
+                    <h2>App Ideas 💡</h2>
+                    <p>- AI-powered recipe generator<br />- Local community marketplace<br />with gamification - Mini...
+                    </p>
+                    <div class="tags">
+                        <span class="tag">◇ ideas</span>
+                        <span class="tag">◇ startup</span>
+                    </div>
+                    <div class="time"><span>◷ 2d ago</span></div>
+                </article> -->
+            </section>
+        </section>
+    </main>
+
+    <section class="overlay" id="overlay">
+        <form class="modal" id="noteForm">
+            <div class="modal-header">
+                <h2 class="modal-title">New Note</h2>
+                <button class="close-button" type="button" id="closeModal" aria-label="Close">×</button>
+            </div>
+
+            <div class="editor">
+                <input class="title-input" id="titleInput" placeholder="Note title..." autocomplete="off" />
+                <hr>
+                <textarea class="note-body" id="noteBody" placeholder="Write your note here..."></textarea>
+            </div>
+
+            <hr>
+            <div class="options">
+                <label>
+                    <span class="field-label">Category</span>
+                    <span class="select-wrap">
+                        <select class="category-select">
+                            <option>Personal</option>
+                            <option>Work</option>
+                            <option>Study</option>
+                            <option>Ideas</option>
+                            <option>To-Do</option>
+                        </select>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="m6 9 6 6 6-6" />
+                        </svg>
+                    </span>
+                </label>
+
+                <div>
+                    <span class="field-label">Color</span>
+                    <div class="color-row" id="colorRow">
+                        <button type="button" class="color-dot active" style="background:#475569"
+                            aria-label="Slate color"></button>
+                        <button type="button" class="color-dot" style="background:#fde979"
+                            aria-label="Yellow color"></button>
+                        <button type="button" class="color-dot" style="background:#a7f3c8"
+                            aria-label="Green color"></button>
+                        <button type="button" class="color-dot" style="background:#bfdbfe"
+                            aria-label="Blue color"></button>
+                        <button type="button" class="color-dot" style="background:#fbcfe8"
+                            aria-label="Pink color"></button>
+                        <button type="button" class="color-dot" style="background:#e9d5ff"
+                            aria-label="Purple color"></button>
+                        <button type="button" class="color-dot" style="background:#fed7aa"
+                            aria-label="Orange color"></button>
+                    </div>
+                </div>
+
+                <div class="tags-field">
+                    <span class="field-label">Tags</span>
+                    <div class="tag-control">
+                        <input class="tag-input" id="tagInput" placeholder="Add tag..." autocomplete="off" />
+                        <button class="add-tag" type="button" id="addTag" aria-label="Add tag">+</button>
+                    </div>
+                    <div class="tag-chip-row" id="tagChipRow"></div>
+                </div>
+            </div>
+
+            <hr>
+            <div class="footer">
+                <div class="word-count">
+                    <span id="wordCount">0 words</span>
+                    <span id="charCount">0 chars</span>
+                </div>
+                <button class="cancel" type="button" id="cancelModal">Cancel</button>
+                <button class="save" type="submit">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z" />
+                        <polyline points="17 21 17 13 7 13 7 21" />
+                        <polyline points="7 3 7 8 15 8" />
+                    </svg>
+                    Save Note
+                </button>
+            </div>
+        </form>
+    </section>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>

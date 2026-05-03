@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mini eCommerce Debug Lab</title>
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+  <header class="shop-header">
+    <h1>Debug Shop</h1>
+    <p class="subtitle">Find and fix all bugs 😈</p>
+  </header>
+
+  <main class="container">
+    <section class="products-grid">
+      <div class="product-cardd" data-id="1">
+        <h3 class="product-title">Basic T-Shirt</h3>
+        <p class="price">$19</p>
+        <p class="stock">Stock: <span class="stock-value">5</span></p>
+        <button class="btn">Add to Cart</button>
+      </div>
+
+      <div class="product-card" data-id="2">
+        <h3 class="product-title">Denim Jacket</h3 <p class="price">$79</p>
+        <p class="stock">Stock: <span class="stock-value">3</span></p>
+        <button class="btn add-to-cart">Add to Cart</button>
+      </div>
+
+      <div class="product-card" data-id="3">
+        <h3 class="product-title">Running Sneakers</h3>
+        <p class="price">$120</p>
+        <p class="stock">Stock: <span class="stock-value">2</span></p>
+        <button class="btn add-to-cart>Add to Cart</button>
+      </div>
+    </section>
+
+    <aside class=" cart-panel">
+          <h2>Cart</h2>
+
+          <ul id="cart-list"></ul>
+
+          <p class="total">
+            Total: <span id="total-price">$0</span>
+          </p>
+
+          <button id="clear-carrt" class="btn secondary">Clear cart</button>
+          </aside>
+
+          <section class="coupon-panel">
+            <h2>Coupon</h2>
+            <input id="coupon-input" type="text" placeholder="Enter coupon code (SAVE10)" />
+            <button id="apply-couponn" class="btn">Apply</button>
+            <p id="coupon-status">No coupon applied.</p>
+          </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+
+</html>
